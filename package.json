@@ -6,7 +6,10 @@
   "scripts": {
     "prebuild": "npx eslint . --fix --ext .ts",
     "build": "tsc",
-    "test": "jest --runInBand --coverage"
+    "test": "jest --runInBand --coverage",
+    "zip": "zip -r customers.zip dist node_modules",
+    "deploy": "aws lambda update-function-code --profile modlost --region us-east-1 --function-name CustomersLambda --zip-file fileb://$PWD/customers.zip",
+    "log": "aws logs tail /aws/lambda/CustomersLambda --follow --profile modlost --region us-east-1"
   },
   "dependencies": {
     "axios": "1.8.4",
